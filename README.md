@@ -47,17 +47,20 @@ npm i --save-dev --unsafe-perm node-sass
 
  • To start the scheduler with embedded mariadb4j as persistence, use Maven run. 
 To use a permanent Port for mariadb4j or persistent dataDir, please uncomment and provide corresponding details in application.yml
-To use external mysql database aa persistence unit, please change db=mysql and provide the DB url and driver class accordingly. The properties are already pasted , commented in application.yml file.
+To use external mysql database as persistence unit, please change db=mysql and provide the DB url and driver class accordingly. The properties are already pasted , commented in application.yml file.
 
 Also an important property to be configured in application.yml is conductor.server.api.endpoint , which internally is used to trigger the workflows through rest API call.
 
 cd conductor-quartz-workflow-scheduler
+
 mvn spring-boot:run
 
 In case, you would like to package the jar first and then run.
 
 mvn install
+
 cd target
+
 java -jar conductor-quartz-workflow-scheduler-0.0.1-SNAPSHOT.jar
 
 To access the Swagger UI, please use the url sample below for reference.
