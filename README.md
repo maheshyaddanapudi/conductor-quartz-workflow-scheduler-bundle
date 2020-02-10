@@ -13,7 +13,7 @@ The idea is to build a single suite of loosely coupled open source tools to perf
  • Spring Boot - Quartz Scheduler - embedded MariaDB support & external MySQL DB support.
 
 
-The catch point being, it will be a UI and Scheduler Jar  which will enable Conductor Workflows to Bed scheduled by user using UI interface 
+The catch point being, it will be a UI and Scheduler Jar  which will enable Conductor Workflows to be scheduled by user using UI interface 
 
 How ? 
 
@@ -38,7 +38,9 @@ Thus eliminating the need to code or have knowledge of coding / scripting / IT t
  • To install necessary modules for Angular JS, navigate to conductor-scheduler-angular-ui directory and execute the npm install commands.
 
 cd conductor-scheduler-angular-ui
+
 npm i --save
+
 npm i --save-dev --unsafe-perm node-sass
 
 ## Startup Instructions
