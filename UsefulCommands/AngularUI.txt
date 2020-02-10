@@ -1,0 +1,7 @@
+PORT=1987 WF_SERVER=http://localhost:8080/api/ WF_SCHEDULER=http://localhost:1408/api/ npm run start
+
+PORT=1987 WF_SERVER=http://localhost:8080/api/ WF_SCHEDULER=http://localhost:1408/api/ npm run server
+
+PORT=1987 WF_SERVER=http://localhost:8080/api/ WF_SCHEDULER=http://localhost:1408/api/ npm run build
+
+PORT=1987 WF_SERVER=http://localhost:8080/api/ WF_SCHEDULER=http://localhost:1408/api/ npm run build --prod

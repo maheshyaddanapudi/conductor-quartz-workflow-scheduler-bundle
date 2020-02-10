@@ -1,0 +1,141 @@
+<div class="mb-3 card text-white bg-vicious-stance text-center text-white">
+  <div class="card-body"><h5>View Workflow Definitions</h5></div>
+</div>
+
+<ngx-spinner
+bdColor = "rgba(51,51,51,0.8)"
+size = "medium"
+color = "#2460d6"
+type = "ball-fall"
+[fullScreen] = "false"
+>
+<p style="color: red" > Loading... </p>
+</ngx-spinner>
+
+<div class="main-card mb-3 card">
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead class="text-white bg-vicious-stance">
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">Name</th>
+        <th>Description</th>
+        <th class="text-center">Version</th>
+        <th class="text-center">Total Tasks</th>
+        <th class="text-center">Input Keys</th>
+        <th class="text-center">Output Keys</th>
+        <th class="text-center">JSON</th>
+        <th class="text-center">Details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let workflowDef of workflowDefs; index as workflowDefCounter">
+        <td class="text-center text-muted">#{{workflowDefCounter+1}}</td>
+        <td class="text-center">
+          <div class="widget-content p-0">
+            <div class="widget-content-left flex2">
+              <div class="widget-heading">{{workflowDef.name}}</div>
+              <div class="widget-subheading opacity-7">Restartable:: {{workflowDef.restartable}}</div>
+            </div>
+          </div>
+        </td>
+        <td>{{workflowDef.description}}</td>
+        <td class="text-center">{{workflowDef.version}}</td>
+        <td class="text-center">{{workflowDef.tasks.length}}</td>
+        <td class="text-center">
+            <ng-template #inputParametersContent let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Input Parameters</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body bg-secondary">
+                <perfect-scrollbar style="height: 250px; padding-bottom: 10px" [config]="config">
+                    <div class="card-body">
+                      <table class="mb-0 table table-dark">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Parameter Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let anInputParam of workflowDef.inputParameters; index as inputParamCounter">
+                          <th scope="row">{{inputParamCounter+1}}</th>
+                          <td>{{anInputParam}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </perfect-scrollbar>
+                <div class="mb-3 card text-white card-body"
+                    style="background-color: rgb(51, 51, 51); border-color: rgb(51, 51, 51)"><h5
+                        class="text-white card-title">Input Parameters Count</h5>Total of {{workflowDef.inputParameters.length}} input keys were found.
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+              </div>
+            </ng-template>
+          <button *ngIf="undefined != workflowDef.inputParameters && workflowDef.inputParameters.length > 0 ; else inputParametersDisabled" (click)="openSmall(inputParametersContent)" type="button" class="btn btn-primary btn-sm">Input</button>
+          <ng-template #inputParametersDisabled>
+              <button type="button" class="btn btn-primary btn-sm disabled">Input</button>
+          </ng-template>
+        </td>
+        <td class="text-center">
+            <ng-template #outputParametersContent let-c="close" let-d="dismiss">>
+                <div class="modal-header">
+                  <h4 class="modal-title">Output Params JSON</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body bg-secondary">
+                    <div class="card-border mb-3 card card-body border-info">
+                        <perfect-scrollbar style="height: 150px" [config]="config">
+                          {{JSON.stringify(workflowDef.outputParameters)}}
+                        </perfect-scrollbar>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                </div>
+            </ng-template>
+          <button *ngIf="undefined != workflowDef.outputParameters ; else outputParametersDisabled" (click)="openSmall(outputParametersContent)" type="button" class="btn btn-success btn-sm">Output</button>
+          <ng-template #outputParametersDisabled>
+              <button type="button" class="btn btn-success btn-sm disabled">Output</button>
+          </ng-template>
+        </td>
+        <td class="text-center">
+            <ng-template #workflowDefJsonContent let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">WorkflowDef JSON</h4>
+                <button type="button" class="close" aria-label="Close" (click)="setworkflowDefJsonTemp(''); d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body bg-secondary">
+                  <div class="card-border mb-3 card card-body border-info">
+                      <perfect-scrollbar style="height: 150px" [config]="config">
+                          {{workflowDefJsonTemp}}
+                      </perfect-scrollbar>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="setworkflowDefJsonTemp(''); c('Close click')">Close</button>
+              </div>
+            </ng-template>
+          <button type="button" class="btn btn-focus btn-sm" (click)="setworkflowDefJsonTemp(workflowDef); openLarge(workflowDefJsonContent)">JSON</button>
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-info btn-sm" (click)="triggerWorkflow(workflowDef.name, workflowDef.version)">Details</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-block text-center card-footer">
+    Total of {{workflowDefs.length}} Workflows were found ...
+  </div>
+</div>

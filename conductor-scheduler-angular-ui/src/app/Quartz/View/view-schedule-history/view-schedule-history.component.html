@@ -1,0 +1,80 @@
+<div class="mb-3 card text-white bg-vicious-stance text-center text-white">
+  <div class="card-body"><h5>View Schedule History</h5></div>
+</div>
+
+<ngx-spinner
+bdColor = "rgba(51,51,51,0.8)"
+size = "medium"
+color = "#2460d6"
+type = "ball-fall"
+[fullScreen] = "false"
+>
+<p style="color: red" > Loading... </p>
+</ngx-spinner>
+
+<div *ngIf="undefined != conductorQuartzHistoryFetchError" class="mb-3 card text-white card-body bg-warning">
+  <h5 class="text-white card-title">{{conductorQuartzHistoryFetchError}}</h5>
+</div>
+
+<div class="main-card mb-3 card">
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead class="text-white bg-vicious-stance">
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">Conductor Correlation Id</th>
+        <th class="text-center">Execution Status</th>
+        <th class="text-center">Log</th>
+        <th class="text-center">Inserted</th>
+        <th class="text-center">Updated</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let conductorQuartzHistory of conductorQuartzHistoryList; index as conductorQuartzHistoryCounter">
+        <td class="text-center text-muted">#{{conductorQuartzHistoryCounter+1}}</td>
+        <td class="text-center">
+          <div class="widget-content p-0">
+            <div class="widget-content-left flex2">
+              <div class="widget-heading">{{conductorQuartzHistory.conductorCorrelationId}}</div>
+              <div class="widget-subheading opacity-7">History Id:: {{conductorQuartzHistory.historyId}}</div>
+            </div>
+          </div>
+        </td>
+        <td class="text-center">
+          <div *ngIf="conductorQuartzHistory.quartzExecutionStatus ; else failedStatus" class="badge badge-pill badge-success">Success</div>
+          <ng-template #failedStatus>
+            <div class="badge badge-pill badge-warning">Failed</div>
+          </ng-template>
+        </td>
+        <td class="text-center">
+            <ng-template #conductorQuartzHistoryJsonContent let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Log</h4>
+                <button type="button" class="close" aria-label="Close" (click)="setconductorQuartzHistoryLogTemp(''); d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body bg-secondary">
+                  <div class="card-border mb-3 card card-body border-info">
+                      <perfect-scrollbar style="height: 150px" [config]="config">
+                          {{conductorQuartzHistoryLogTemp}}
+                      </perfect-scrollbar>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="setconductorQuartzHistoryLogTemp(''); c('Close click')">Close</button>
+              </div>
+            </ng-template>
+          <button type="button" class="btn btn-focus btn-sm" (click)="setconductorQuartzHistoryLogTemp(conductorQuartzHistory); openLarge(conductorQuartzHistoryJsonContent)">Log</button>
+        </td>
+        <td class="text-center">
+          <div class="widget-heading">{{conductorQuartzHistory.insertTimestamp}}</div>
+        </td>
+        <td class="text-center">
+          <div class="widget-heading">{{conductorQuartzHistory.updateTimestamp}}</div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

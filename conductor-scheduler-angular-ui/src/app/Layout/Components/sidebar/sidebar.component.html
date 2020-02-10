@@ -1,0 +1,102 @@
+<div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+     (mouseout)="sidebarHover()">
+  <div class="app-header__logo bg-asteroid">
+    <div class="logo-src"></div>
+    <div class="header__pane ml-auto">
+      <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+              [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="app-sidebar-content bg-royal">
+    <div class="app-sidebar-scroll">
+      <perfect-scrollbar [autoPropagation]="true">
+        <div class="v-sidebar-menu vsm-default">
+          <div class="vsm-list">
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header">Main Navigation</div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="dashboardsMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-rocket"></i>
+                    <span class="vsm-title text-white">Dashboards</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item"><a routerLink="/dashboards/scheduler/scheduler-portfolio-dashboard" skipLocationChange routerLinkActive="active-item"
+                                               [routerLinkActiveOptions]="{exact: true}" class="vsm-link"><span
+                        class="vsm-title text-white">Analytics</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+              
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header">Conductor</div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="conductorMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-graph2"></i>
+                    <span class="vsm-title text-white">View</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/conductor/view/view-all-workflows" skipLocationChange class="vsm-link">
+                          <span class="vsm-title text-white">View Workflows</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+              
+
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header">Quartz</div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="quartzMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-graph2"></i>
+                    <span class="vsm-title text-white">View</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/quartz/view/view-all-schedules" skipLocationChange class="vsm-link">
+                          <span class="vsm-title text-white">View Schedules</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

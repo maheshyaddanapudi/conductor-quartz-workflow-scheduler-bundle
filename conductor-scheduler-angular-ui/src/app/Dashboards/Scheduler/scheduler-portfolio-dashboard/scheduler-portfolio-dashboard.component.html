@@ -1,0 +1,84 @@
+<ngx-spinner
+bdColor = "rgba(51,51,51,0.8)"
+size = "medium"
+color = "#2460d6"
+type = "ball-fall"
+[fullScreen] = "false"
+>
+<p style="color: red" > Loading... </p>
+</ngx-spinner>
+ <div class="mb-3 card bg-vicious-stance">
+  <div class="card-header-tab card-header text-center bg-vicious-stance">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-bold text-white">
+      <i class="header-icon lnr-charts icon-gradient bg-happy-green"> </i>
+      Scheduler Portfolio Performance
+    </div>
+  </div> 
+  <div class="card mb-3 bg-premium-dark text-white">
+    <div class="no-gutters row">
+      <div class="col-md-12 col-lg-4">
+        <ul class="list-group list-group-flush">
+          <li class="bg-transparent list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Total Executions</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-warning">{{total}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <ul class="list-group list-group-flush">
+          <li class="bg-transparent list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Failed Executions</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-danger">{{failed}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <ul class="list-group list-group-flush">
+          <li class="bg-transparent list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Successful Executions</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-success">{{success}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <div class="no-gutters row">
+      <div class="col-md-2">
+        <div class="widget-heading text-center text-white text-capitalize">Success Percentage</div>
+      </div>
+      <div class="col-md-10">
+        <ngb-progressbar showValue="true" type="success" [value]="percentage" height="20px" [striped]="true" [animated]="true"></ngb-progressbar>
+      </div>
+    </div>
+  <br>
+</div>

@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: conductor-quartz-workflow-scheduler
+  datasource:
+    #driver-class-name: com.mysql.cj.jdbc.Driver ## Uncomment for db=mysql
+    #url: jdbc:mysql://localhost:3306/quartz?autoReconnect:true ## Uncomment for db=mysql
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: Root!23$
+  jpa:
+    hibernate:
+      ddl-auto: none
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org:
+        quartz:
+          threadPool:
+            threadCount: 1000
+    wait-for-jobs-to-complete-on-shutdown: true
+    scheduler-name: ${spring.application.name}
+
+server:
+  port: 1408
+
+logging:
+  level:
+    root: info
+
+db: mariadb4j
+#db: mysql ## Uncomment for db=mysql
+
+## Uncomment for db=mariadb4j more customized / persistence data directory options
+#mariaDB4j:
+#  port: 3306
+#  dataDir: ./data
+#  libDir: ./lib
+#  baseDir: ./base
+
+#app:
+#  mariaDB4j:
+#    databaseName: quartz
+
+conductor:
+  server:
+    api:
+      endpoint: http://localhost:8080/api/
+
+api:
+  version: 1.0
+swagger:
+  enabled: true
+  title: Conductor Quartz Workflow Scheduler API
+  description: Sample Swagger implementation for the `conductor-quartz-workflow-scheduler` service, leveraging annotations at the controller-method level.
+  useDefaultResponseMessages: false
+  enableUrlTemplating: false
+  deepLinking: true
+  defaultModelsExpandDepth: 1
+  defaultModelExpandDepth: 1
+  displayOperationId: false
+  displayRequestDuration: false
+  filter: false
+  maxDisplayedTags: 0
+  showExtensions: false;

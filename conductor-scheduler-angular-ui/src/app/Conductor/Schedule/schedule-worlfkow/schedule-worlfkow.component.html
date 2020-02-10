@@ -1,0 +1,177 @@
+<div class="text-center card-body bg-vicious-stance text-white"><h6 class="card-title">Schedule / Trigger Workflow</h6>
+  {{workflowName}} : {{workflowVersion}}
+</div>
+<ngx-spinner
+bdColor = "rgba(51,51,51,0.8)"
+size = "medium"
+color = "#2460d6"
+type = "ball-fall"
+[fullScreen] = "true"
+>
+<p style="color: red" > Loading... </p>
+</ngx-spinner>
+<div style="height: 10px">
+
+</div>
+
+<div class="row" style="background-color: white">
+  <ngb-tabset type="pills" [orientation]="currentOrientation" class="col-md-12">
+    <ngb-tab title="Web Form">
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div class="main-card mb-3 card col-md-6" style="border: 0px">
+            <div class="card-body"><h5 class="card-title">Workflow Sequence</h5>
+              
+              <div class="vertical-time-simple vertical-without-time vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                
+                  <div class="vertical-timeline-item dot-success vertical-timeline-element">
+                      <div>
+                          <span class="vertical-timeline-element-icon bounce-in"></span>
+                          <div class="vertical-timeline-element-content bounce-in">
+                              <div class="badge badge-pill badge-success">START</div>
+                          </div>
+                        </div>
+                      </div>
+    
+                <div *ngFor="let task of tasks">
+                    <div *ngIf="task.optional; else taskMandatory" class="vertical-timeline-item dot-primary vertical-timeline-element">
+                        <div>
+                          <span class="vertical-timeline-element-icon bounce-in"></span>
+                          <div class="vertical-timeline-element-content bounce-in">
+                            <h4 class="timeline-title">
+                              {{task.name}}
+                            </h4>
+                            <span class="text-success">{{task.description}}</span>
+                          </div>
+                        </div>
+                      </div>
+    
+                      <ng-template #taskMandatory>
+                          <div class="vertical-timeline-item dot-warning vertical-timeline-element">
+                              <div>
+                                <span class="vertical-timeline-element-icon bounce-in"></span>
+                                <div class="vertical-timeline-element-content bounce-in">
+                                  <h4 class="timeline-title">
+                                    {{task.name}}
+                                  </h4>
+                                  <span class="text-success">{{task.description}}</span>
+                                </div>
+                              </div>
+                            </div>
+      
+                      </ng-template>
+                </div>
+                
+    
+                <div class="vertical-timeline-item dot-info vertical-timeline-element">
+                    <div>
+                        <span class="vertical-timeline-element-icon bounce-in"></span>
+                        <div class="vertical-timeline-element-content bounce-in">
+                            <div class="badge badge-pill badge-info">END</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="main-card mb-3 card col-md-6" style="border: 0px">
+            <div class="card-body">
+              <h5 class="card-title">Workflow Input Params</h5>
+              <form>
+                <div *ngFor="let anInput of inputParamsForBE; index as inputCounter" class="position-relative form-group">
+                  <label for="anInput">{{anInput}}</label>
+                  <input name="anInput" id="anInput" (keyup)="updateInputValues(inputCounter, $event.target.value)" placeholder="Enter the Input value" type="text" class="form-control">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>JSON Payload</ng-template>
+      <ng-template ngbTabContent>
+        <textarea [(ngModel)]="workflowJsonPayload" placeholder="Paste Conductor API POST workflow payload ..." rows="10" class="col-md-12"></textarea>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+    <div *ngIf="workflowSubmittedId.length > 0 ; else triggerFailure" class="mb-3 card text-white card-body bg-success">
+      <h5 class="text-white card-title">{{workflowSubmittedId}}</h5> Yay! Triggered Workflow Successfully
+    </div>
+    <ng-template #triggerFailure>
+      <div *ngIf="workflowSubmittedError.length > 0" class="mb-3 card text-white card-body bg-warning">
+        <h5 class="text-white card-title">{{workflowSubmittedError}}</h5> UoOh! Triggered Workflow Failed
+      </div>
+    </ng-template>
+</div>
+<div style="height: 10px">
+
+</div>
+<button *ngIf="!disableTrigger; else disabledTrigger" (click)="triggerWorkflow()" class="mb-2 mr-2 btn btn-primary btn-lg btn-block">Trigger Workflow ...</button>
+<ng-template #disabledTrigger>
+    <button class="mb-2 mr-2 btn btn-primary btn-lg btn-block disabled">Trigger Workflow ...</button>
+</ng-template>
+<div class="main-card mb-3 card" style="border: 0px;">
+  <div class="card-body bg-slick-carbon">
+    <h5 class="card-title text-center text-white">Workflow Execution Scheduler Settings</h5>
+    </div>
+  <div class="mb-0 bg-secondary modal-body">
+    <div>
+      <div>
+          <cron-editor [(cron)]="cronExpression" [disabled]="isCronDisabled" [(options)]="cronOptions"></cron-editor>
+          <hr />
+          <p>The resulting Cron expression: </p>
+          <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control" [(ngModel)]="cronExpression" readonly>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div style="text-align: center; width:50%">
+        <label for="startDate">Start Date </label>
+        <input id="startDate" name="startDate" [(ngModel)]="startDate" type="date">
+      </div>
+      <div style="text-align: center; width:50%">
+          <label for="endDate">End Date </label>
+          <input id="endDate" name="endDate" [(ngModel)]="endDate" type="date">
+        </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="scheduleWorkflowMessage != '' && disableTrigger ; else schedulerFailure" class="mb-3 card text-white card-body bg-success">
+  <h5 class="text-white card-title">{{scheduleWorkflowMessage}}</h5> Yay! Scheduled Workflow Successfully
+</div>
+<ng-template #schedulerFailure>
+  <div class="mb-3 card text-white card-body bg-warning">
+    <h5 class="text-white card-title">{{scheduleWorkflowMessage}}</h5> Uh-Oh! Schedule Workflow Failed
+  </div>
+</ng-template>
+
+<ng-template #scheduleDetails let-c="close" let-d="dismiss">
+  <div class="card-body bg-slick-carbon text-white" style="padding-bottom: 0%;"><h5 class="card-title text-center">Scheduling Application Details</h5>
+    <form>
+      <div class="position-relative row form-group"><label class="col-sm-2 col-form-label">Schedule Name</label>
+        <div class="col-sm-10"><input [(ngModel)]="scheduleName" name="scheduleName" id="scheduleName" placeholder="Enter a Unique Schedule Name"
+                                      type="text" class="form-control"></div>
+      </div>
+      <div class="position-relative row form-group"><label class="col-sm-2 col-form-label">Schedule Description</label>
+        <div class="col-sm-10"><textarea [(ngModel)]="scheduleDesc" name="scheduleDesc" id="scheduleDesc" placeholder="Enter a detailed description with as many details as possible" class="form-control"></textarea></div>
+      </div>
+    </form>
+    <div class="mb-3 widget-content" style="width: 100%; height: 100%;">
+      <div class="widget-content-wrapper">
+          <div class="widget-content-left">
+              <button type="button" class="btn btn-light btn-block btn-lg" (click)="c('Close click')">Cancel</button> 
+          </div>
+          <div class="widget-content-right">
+              <button type="button" class="btn btn-primary btn-block btn-lg" (click)="scheduleWorkflow(cronExpression); c('Close click')">Continue</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</ng-template>
+
+<button *ngIf="!disableTrigger ; else disabledSchedule" (click)="openLarge(scheduleDetails)" class="mb-2 mr-2 btn btn-focus btn-lg btn-block">Schedule Workflow ...</button>
+<ng-template #disabledSchedule>
+  <button class="mb-2 mr-2 btn btn-focus btn-lg btn-block disabled">Schedule Workflow ...</button>
+</ng-template>
