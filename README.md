@@ -90,6 +90,81 @@ Please provide the Conductor Server URL and Scheduler Server URL accordingly.
 
 Access the UI : http://localhost:1987/
 
+## Screenshots
+
+1) Dashboard before any schedule was created
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/Dashboard_Before.png)
+
+2) Conductor Workflows
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFDefinitions.png)
+
+3) Conductor Worfklow Inputs
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFInputs.png)
+
+4) Conductor Workflow Outputs
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFOutput.png)
+
+5) Conductor Workflow JSON
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFJSON.png)
+
+6) Conductor Workflow Trigger Web UI
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFTriggerWebUI.png)
+
+7) Conductor Workflow Trigger JSON Payload
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFTriggerJSON.png)
+
+8) Conductor Workflow Scheduling
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFSchedule.png)
+
+9) Conductor Workflow Scheduling Details
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFScheduleDetails.png)
+
+10) Conductor Workflow Scheduling Success
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/ConductorWFSchedulingSuccessful.png)
+
+11) Quartz Schedules
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/QuartzViewSchedules.png)
+
+12) Quartz Schedule Metadata
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/QuartzScheduleMetadata.png)
+
+13) Quartz Schedule Conductor Workflow Trigger JSON Payload
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/QuartzScheduleWFJSONPayload.png)
+
+14) Quartz Schedule Run History
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/QuartzScheduleRunHistory.png)
+
+15) Dashboard after schedule was created and executed by scheduler
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/Dashboard_After.png)
+
+16) Swagger UI Home - Conductor Quartz Workflow Scheduler Jar
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/CQWSchedulerSwaggerUIHome.png)
+
+17) Swagger UI - Conductor Quartz Workflow Scheduler - API Part 1
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/CQWSchedulerSwaggerUIAPI1.png)
+
+18) Swagger UI - Conductor Quartz Workflow Scheduler - API Part 2
+
+![alt text](https://raw.githubusercontent.com/maheshyaddanapudi/images/master/CQWSchedulerSwaggerUIAPI2.png)
+
+
 ## Motivation
 
 There is a saying from recent times that "Every idea comes from a pain point"
