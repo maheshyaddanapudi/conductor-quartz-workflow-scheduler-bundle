@@ -1,6 +1,6 @@
-# conductor-quartz-workflow-scheduler-bundle
-conductor-quartz-workflow-scheduler-bundle
 # CQW Scheduler Bundle
+
+conductor-quartz-workflow-scheduler-bundle
 
 CQW Scheduler Bundle = Conductor Quartz Workflow Scheduler Bundle
 
@@ -30,6 +30,12 @@ Once all done, the user can see the schedules built by UI and can pause / resume
 Also a summary of run history of each schedule can be viewed in UI instead of connecting to database or mining logs.
 
 Thus eliminating the need to code or have knowledge of coding / scripting / IT tools for development of Scheduler for Conductor.
+
+## Pre-Requisites
+1. openjdk8 or Java 8
+2. Maven / mvn
+3. Node JS / npm
+4. @angular/cli@7
 
 ## Setup Instructions
 
