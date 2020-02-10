@@ -142,7 +142,7 @@ type = "ball-fall"
   <h5 class="text-white card-title">{{scheduleWorkflowMessage}}</h5> Yay! Scheduled Workflow Successfully
 </div>
 <ng-template #schedulerFailure>
-  <div class="mb-3 card text-white card-body bg-warning">
+  <div *ngIf="scheduleWorkflowMessage != ''" class="mb-3 card text-white card-body bg-warning">
     <h5 class="text-white card-title">{{scheduleWorkflowMessage}}</h5> Uh-Oh! Schedule Workflow Failed
   </div>
 </ng-template>
