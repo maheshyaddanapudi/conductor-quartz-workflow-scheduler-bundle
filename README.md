@@ -65,7 +65,7 @@ java -jar conductor-quartz-workflow-scheduler-0.0.1-SNAPSHOT.jar
 
 To access the Swagger UI, please use the url sample below for reference.
 
-http://localhost:1987/swagger-ui.html
+http://localhost:1408/swagger-ui.html
 
 
  • To start the angular UI, use the below commands , for the development and prod mimic startup
@@ -81,6 +81,8 @@ For Production mimic mode: Slow (Very) compile time & Fast runtime
 PORT=1987 WF_SERVER=http://localhost:8080/api/ WF_SCHEDULER=http://localhost:1408/api/ npm run server
 
 Please provide the Conductor Server URL and Scheduler Server URL accordingly.
+
+Access the UI : http://localhost:1987/
 
 ## Motivation
 
